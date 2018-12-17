@@ -1,0 +1,35 @@
+Day 1
+#자바 가상 머신 (JVM : Java Virtual Machine)
+class 파일 - JAVA 파일을 byte code 형식으로 JVM 이 이해할 수 있도록 변환된 파일
+JVA 구성 -
+클래스 영역 Class Area
+--매서드 영역 - import 또는 사용자가 직접 작성한 클래드 코드 저장
+-- 상수 풀 - 상수들이 저장
+자바 스택 Java Stack - 메서드들을 '호출'하고 관련된 정보를 주고 받는 영역
+힙 Heap - new라는 예약어를 통해 객체가 동적으로 공간을 할당받는 곳
+네이티브 메서드 스택(Native Method Stacks) - 바이트 코드들이 기록되는 영역
+#식별자 Identifier - 자바에서 사용하는 이름 - 클래스명, 메서드명, 변수명
+#예약어 Reserved Word - 식별자로 사용할 수 없는 이미 예약된 단어 ex) import, class, new
+#기본 자료형 - 까먹기 쉬운것만
+char - 2byte - 문자형
+int - 4byte - 정수형
+long - 8byte - 정수형
+float - 4byte - 실수형
+double - 8byte - 실수형
+리터럴 literal - 이미 만들어 둔 상수값들 ex) /n, /r, /t
+byte < short < int < long - 정수형 크기순
+실수형은 기본이 double 형이라 float 사용시 float 형 임을 명시해야함
+형변환 - 프로모션 (확대변환, 승격, promotion), 디모션 (축소변환,  demotion)
+프로모션 - 더 큰 자료형으로 변환 - 자동 ex) short a = 10; int c = a;
+디모션 -  더 작은 자료형으로 변환 - 명시 ex) short a = 10, b = 10, c; c = (short)(a + b); // 자바에서 타입이 int 보다 작으면(32bit 미만) 연상이 일어나면 자동으로 int 로 형변환됨(promotion)
+#참조 자료형 (객체 자료형)
+자바 내부 (Java API)에서 제공되거나 사용자에 의해 만들어진 class
+#삼항 연산자 - ex) s += a >= b ? a + " 만큼 a가..." : b + " 만큼 b가...";
+수행 후 리턴 할 값이 없으면 오류
+#주석
+/** 주석문 */ - HTML 문서화 주석처리
+
+
+
+
+
