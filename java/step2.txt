@@ -1,0 +1,117 @@
+Day 2
+#Class와 객체
+Class - 설계도면
+객체 - Object - 완성된 건물
+#객체지향 프로그래밍  Object Oriented Programming - 상속, 확장성, 다향성 - 용도와 책임?
+#접근 제한 Access Control / Access Modifier
+#멤버 필드
+변수와 상수 - static 이냐, instance 이냐
+멤버 메서드 - static 메서드, instance 메서드
+static 메서드 - 객체를 생성하지 않아도 사용
+instance 메서드 - 객체를 생성해야만 사용 가능
+모두 멤버 (member)라고 총칭
+#객체 생성과 멤버 접근법
+자료형 - 기본 자로형, 참조 자료형(객체 자료형) - 앞서서 말했었음
+Mp3 m3; // 아직 객체가 생성된 것이 아니라 Mp3 class type이 m3라는 참조 변수가 있는것
+        // 주로 변수와 같이 가벼운 것들이 자리 잡는 stack 영역에 만들어지는 단계
+m3 = new Mp3(); // new 라는 연산자를 통해 heap 영역에 메모리 공간을 할당 받음
+                // 생성된 객체를 참조할 수 있는 참조변수 (reference)를 m3에 담아둠
+프로세스가 끝나면 자동으로 JVM 에 의해 소멸
+#접근 제한자
+public - '모든' 접근 허용
+protected - '같은 패키지'(폴더)에 있는 객체와 '상속' 관계 객체 들만 허용
+default - '같은 패키지'(폴더)에 있는 객체 허용
+private - '현재 객체' 내에서만 허용
+#인스턴스 instance
+클래스 또는 추상적으로 정의된 틀
+#메모리 구조 용어
+Stack 영역 - 변수와 같은 가벼운 것(?)들
+Heap 영역 - 객체 같은 무거운 것(?)들
+Static - '정적'인 값들 - static 은 고정된 정적인 것들이 쓰인다고 생각하면 쉬움 - 있을 수도 없을 수도 있는 동적인 것들은 정적인 static 에서 사용될 수 없다.
+#캡슐화 encapsulation
+여러 개의 자료 및 처리 과정을 하나의 모듈(부품)처럼 사용 - 객체간의 이식성 높임
+밥솥이 어떤 원리와 어떤 과정을 통해서 밥을 지어내는지는 알지 못하지만 그냥 사용법만 익혀서 먹을뿐
+#정보은닉 - 캡슐화의 장점
+'접근 제한법'을 이용하여 자료(instance 변수)를 외부로부터 직접적인 접근을 차단
+#instance 변수
+객체가 생성될 때 각 객체들마다 따로 따로 생성 - 고유의 값을 가짐 - 객체의 속성
+객체를 생성하지 않고서는 절대로 사용할 수 없음 - 명심
+#static 변수 (클래스 변수)
+여러 개의 객체가 생성될 때 '단 하나만 생성'
+모든 객체들이 '공유'
+객체를 생성하지 않아도 접근할 수 있다
+static 영역에 오로지 하나만 만들어지고 모든 객체가 이것을 공유 - 명심
+#instance 메서드
+public void setInt(int var) {
+    this.var = var;
+}
+this - 현재 객체의 자신을 의미 - this.var 은 객체 자신이 멤버중 var 변수를 의미
+public int increase(int n) {
+    ++n;
+    return n;
+}
+int var2 = vp.increase(var1);
+Call by value 방식 - 전달되는 인자(n)는 복사본이 만들어져 전달되는 것 - 실인자(var1)는 전혀 영향을 받지 않는다는 개념
+#참조 호출
+실인자를 사용할 경우 - 기본 자료형이 아닌 '참조 자료형'을 호출
+#Varargs (Variable Arguments)
+public void argTest(Stirng ... n) { }
+가변적인 인자를 전달
+#메서드 오버로딩 Overloading - 중복정의
+하나의 클래스 내에서 같은 이름을 가지는 메서드(멤버함수)가 여러 개 정의되는 것
+#생성자
+객체가 생성될 때 자동적으로 단 한번 호출 - 초기화하는 데 목적
+Return Type 이 없음
+생성자명이 클래스명과 같음
+class MyClass {
+    private String name;
+    public MyClass(String n) { name = n; }
+}
+MyClass mc = new MyClass(); // 오류 - default 생서자를 찾을 수 없다는 오류
+생성자를 하나라도 만들면 컴파일러가 자동으로 default 생성자를 만들어 주지 않기 때문에
+생성자 오버로딩 - 하나의 클래스 내에 여러 개의 생성자가 존재하는 것
+생성자 접근제한의 의미
+- 클래스가  public 이라도 생성자가 private 이면 class 내에서만 생성가능
+- 생성자가 protected 면 상속관계에 sub 클래스들만 자신을 생성할 수 있는 권한을 줌
+#this()
+현재 객체의 생성자를 의미
+주의 - 첫 행에 정의
+this()를 이용하면 - 한 클래스 내의 특정 생성자에서 오버로딩되어 있는 '다른 생성자를 호출할 수 있는 것'
+class ThisConstr {
+    String str;
+    public ThisConstr() {
+        this(" ");
+    }
+    public ThisConstr(char[] ch) {
+        this(String.valueOf(ch));
+    }
+    public ThisConstr(long lo) {
+        this(String.valueOf(lo));
+    }
+}
+...
+ThisConstr tc1 = new ThisConstr(9000);
+ThisConstr tc2 = new ThisConstr(['A', 'B']);
+가 가능 - 코드를 줄일 수 있음
+#static 예약어
+메서드나 멤버변수에 정의할 수 있음
+지역변수나 클래스에 정의할 수 없음
+내부 클래스(Inner Class) 예외
+class Aa {
+    int a;
+    static {
+        a = 1000; // 오류 - instance 변수 가져올 수 없다. - 객체가 있을 수도 없을 수도 있기 때문
+        Aa aa = new Aa();
+        aa.a = 1000; // 은 가능 - 객체의 참조변수를 통해서 접근 할 수 있음
+    }
+}
+# static 초기화 (static Initializers)
+static { } - 이렇게 쓴 것
+객체가 생설될 때 static 이 가장 먼저 익식되며 단 한번 수행
+
+
+
+
+
+
+
