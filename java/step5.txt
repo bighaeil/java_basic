@@ -1,0 +1,63 @@
+Day5
+#Collection
+#Set 인터페이스 - 정렬하지 않음, 중복 요소 X - 주머니속에 저장하는 느낌
+- HashSet : 정렬 X
+- TreeSet : 정렬 O (오름차순)
+#List 인터페이스 - 시퀀스(Sequence) - 정렬상태 유지
+- 배열 - 크기가 고정
+- 컬렉션의 List 구조 - 가변적 길이
+Stack - LIFO
+Vector - 스레드 동기화 지원 (동기화로 인한 과부화)
+ArrayList - 배열 크기 조작 가능 - 동기화 지원 X (속도 향상)
+Queue - FIFO
+#Iterator와 Enumeration - 요소들 순차적 접근 제공하는 객체
+#Thread
+생성 방법 2가지
+- java.lang.Thread 클래스 상속(extends)
+- java.lang.Runnable 인터페이스 구현(implements)
+부모 클래스는 오직 하나 밖에 가실 수 없는 단일 상속이라는 특징 때문에
+start() 메서드 - 새로운 스레드가 생성 - 스레드가 작동하는게 아니라 단지 생성뿐
+run() 메서드 - 스레드가 작동
+#Runnable - run() 메서드가 선언 되 있기 때문에 - 오버라이딩
+join() 메서드 - 호출한 스레드가 종료할 때까지 현재의 스레드를 기다림
+#스레드의 스케줄링 우선순위 - 어떤 스레드를 먼저 실행할까 결정
+선점형(preemptive) 방식 - 우선순위가 높은 스레드를 먼저 수행
+협력형(cooperative) 방식 - 실행중인 스레드가 CPU 사용권을 넘길 때까지 기다림
+%기억% - 스레드 스케줄러가 되어 특별한 행동을 예측하는 프로그램을 만들어서는 절대로 안된다.
+#동기화 - synchronized 예약어 - 하나의 자원을 공유할 경우 - 임계영여(Critical Section)에 락(Lock) - 한 번에 하나의 스레드를 처리하고자 할 때
+synchronized (동기화할 객체 또는 동기화할 클래스명) { ... } // 블록지정
+동기화할 클래스가 자기 자신인 경우에는 this 를 주로 사용하는데, static 은 this 를 사용할 수 없기 때문에, static 메서드 안에서 동기화를 할 경우 - 클래스명을 사용
+#동기화 할 경우 주의해야 할 점 3가지
+- 공정 (fairness) : 공정하게 그 자원을 사용할 수 있도록
+- 기아 (starvation) : 시스템 자원을 얻지 못하고 계속 Blocked 된 상태
+- 교책상태 (deadlock) : 스레드가 서로의 어떤 일을 해주길 기다리는 상태
+#Object 클래스의 wait(). notify(), notifyAll() - synchronized 블록에서만 의미 있음 - 아닌 경우 java.lang.IllegalMonitorStateException 발생
+- wait() - 현재 스레드를 정지시켜 Wait Pool 로 이동 - 락을 가지고 있는 스래드 멈춤
+- notify(), notifyAll() - 정지된 스레드를 다시 깨움
+- wait(long timeout) - 일정 시간 후 깸
+#스트림 - FIFO - 단방향 : 읽기, 쓰기 동시에 X - 데이터가 처리되기 전까지는 스레드는 지연상태에 빠짐 - 네트워크 데이터가 모두 전송된 전까지 네트워크 스레드는 지연상태
+#바이트 스트림 - 1byte
+InputStream
+OutputSteam
+BufferedInputSteam - 데이터를 가능한 많이 읽어서 버퍼에 채우고 - read() 호출은 단지 메모리 버퍼로부터 데이터를 읽어냄 - 실제 입력 연산의 횟수는 읽기 요청 획수에 비하면 적다 - 효율적
+스트림의 연결(channing) - BufferedInputStream 은 단독적으로 파일을 읽을 수 없다.
+#문자 스트림 - 2byte
+#객체 직렬화
+Serializable 인터페이스 - 객체 데이터를 직렬화
+Externalizable 인터페이스 - 특정 멤버 변수만을 직렬화
+#오브젝트 스트림 - 역직렬화하여 다시 원본 객체를 복원
+#NIO (New I/O) - JDK 1.4 - I/O 에서 넌블로킹 (Non-Blocking) 기법 사용 - 읽기 쓰기 할 때 특정한 스레트가 블로킹 되지 않는 형상
+#채널 (Channel) - 입출력을 추상화한 개념 - 데이터를 읽고 쓸 수 있는 연결통로 - 양방향 가능
+#데이터 베이스 - JDBC (Java DataBase Connectivity) - 행(▤), 열(▥)
+1 - impoert java.sql.*;
+2 - 드라이버 로드?- ojdbc6.jar
+3 - Connection 객체 생성
+4 - Statement 객체 생성
+5 - SQL -> ResultSet 객체 생성
+6 - 모든 객체 닫기
+#PreparedStatement - SQL 문은 동일하나 조건이 다른 문장을 변수( ? : 물음표)로 처리
+String sql = "selcet age from test1 where id=?";
+PreparedStatement pstmt = con.prepareStatement(sql);
+pstmt.setString(1, "ABC");
+ResultSet rs = pstmt.executeQuery();
+#ConnectionPool - Connection 객체를 미리 생성하여 재사용
